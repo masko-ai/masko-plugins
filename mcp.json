@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "masko": {
+      "url": "https://masko.ai/api/mcp",
+      "auth": {
+        "CLIENT_ID": "https://masko.ai/oauth/clients/cursor",
+        "scopes": ["masko:read", "masko:write"]
+      }
+    }
+  }
+}
