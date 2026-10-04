@@ -5,11 +5,18 @@ description: Create an original Masko mascot for an app, website or brand, or es
 
 # Create a mascot
 
-Use Masko's connected MCP tools for this workflow. Discover the plugin's tools
+These instructions require Masko's hosted MCP at https://masko.ai/api/mcp.
+For Cursor, follow the [connection guide](https://masko.ai/docs/ai-tools/cursor),
+sign in through OAuth, and choose the user's personal or team workspace.
+Skills-only installation adds instructions; configure and authorize the MCP
+separately in the host. Other hosts need their own supported Masko connection.
+A safe first check is to list projects, mascots and credits without generating.
+
+Use Masko's connected MCP tools for this workflow. Discover the MCP tools
 before declaring them unavailable. If they are unavailable, or the host blocks
 an action for approval, explain the exact limitation and stop the affected step.
 Do not substitute the Masko Mac app, another account, or a direct API credential
-to make a plugin operation appear successful. Do not change host permissions.
+to make an MCP operation appear successful. Do not change host permissions.
 
 Use the connected Masko tools. If disconnected, use the host's connection flow;
 never ask the user to paste an API key, password, or OAuth token into the chat.

@@ -1,7 +1,7 @@
 {
   "name": "masko",
   "displayName": "Masko",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create and animate mascots, build interactive behaviors, and integrate transparent assets into your app or website.",
   "author": { "name": "Masko", "email": "paul@masko.ai" },
   "homepage": "https://masko.ai/docs/ai-tools/cursor",

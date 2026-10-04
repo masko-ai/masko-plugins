@@ -1,9 +1,10 @@
-# Masko for Cursor
+# Masko workflow skills and Cursor plugin
 
 Create a character for your product, animate your own artwork, and put the
 finished mascot into your app or website.
 
-This plugin connects Cursor to Masko's hosted MCP server and includes four skills:
+Use these four skills with a connected Masko MCP. The repository also includes a
+Cursor plugin that bundles the skills and connection configuration.
 
 | Skill | Use it to |
 | --- | --- |
@@ -12,22 +13,76 @@ This plugin connects Cursor to Masko's hosted MCP server and includes four skill
 | `build-interactive-mascot` | Build states and reactions to product events |
 | `integrate-mascot` | Add assets and smooth animation switching to your app |
 
-## Install and connect
+## Install standalone skills in Cursor
 
-For a local installation, copy this entire plugin directory, including
+Run this in the project where you want to use Masko:
+
+```bash
+npx skills add masko-ai/masko-plugins --agent cursor --skill '*' --yes
+```
+
+This installs all four workflow skills for Cursor in that project. Add
+`--global` to make them available across your Cursor projects. To install only
+one, replace `--skill '*'` with `--skill create-mascot`, `--skill animate-mascot`,
+`--skill build-interactive-mascot`, or `--skill integrate-mascot`.
+
+Skills provide instructions. Configure and authorize the MCP connection
+separately so the agent can use Masko's tools.
+
+## Connect the Masko MCP
+
+Add this server to Cursor's MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "masko": {
+      "url": "https://masko.ai/api/mcp",
+      "auth": {
+        "CLIENT_ID": "https://masko.ai/oauth/clients/cursor",
+        "scopes": ["masko:read", "masko:write"]
+      }
+    }
+  }
+}
+```
+
+Connect through Cursor's OAuth flow. Sign in on masko.ai, choose your personal or
+team workspace, and approve access. The client ID is public configuration for
+Cursor; it is not a secret. No API key or separate MCP process is needed.
+
+The [Cursor setup guide](https://masko.ai/docs/ai-tools/cursor) covers the
+connection and troubleshooting. For another host, use that host's supported
+Masko OAuth connection. Installing these skills into an agent does not establish
+that its MCP connection is compatible. Keep the Cursor client configuration in
+Cursor.
+
+## Verify the connection
+
+Open or reload the project in Cursor, then check **Customize → Skills** for the
+four Masko skills. See [Cursor's skill documentation](https://cursor.com/docs/skills)
+for skill discovery and invocation.
+
+Ask: **“Show my Masko projects, mascots and credit balance. Don't generate anything.”**
+
+A working connection returns results from the workspace chosen during OAuth,
+including an empty project list when the workspace is new. Complete the
+connection before asking for generation. This check does not create images or
+animations and uses no generation credits.
+
+Disconnect in Masko's [Connected apps](https://masko.ai/settings/connections)
+when you choose to.
+
+## Install the Cursor plugin
+
+For a local Cursor plugin installation, copy this entire directory, including
 `.cursor-plugin`, into `~/.cursor/plugins/local/masko`. Restart Cursor or run
 **Developer: Reload Window**, then open **Customize** and enable Masko.
 Your organization's policy may restrict local plugin imports. This repository
 does not imply that the plugin has been accepted into the Cursor Marketplace.
 
-Connect the Masko MCP server when Cursor prompts you. Sign in on masko.ai,
-choose your personal or team workspace, and approve its permissions. The public
-client ID in `mcp.json` identifies this integration; it is not a secret. No API
-key, terminal login, or separate MCP process is needed.
-
-Start with: **“Show my Masko projects, mascots and credit balance. Don't generate anything.”**
-The results come from the workspace chosen during connection. Disconnect in
-Masko's [Connected apps](https://masko.ai/settings/connections) at any time.
+The plugin includes the MCP configuration above. Connect when Cursor prompts
+you, then run the same connection check.
 
 ## Try it
 

@@ -5,15 +5,23 @@ description: Build or edit a Masko canvas so a mascot reacts to app events using
 
 # Build an interactive mascot
 
-Use Masko's connected MCP tools for this workflow. Discover the plugin's tools
+These instructions require Masko's hosted MCP at https://masko.ai/api/mcp.
+For Cursor, follow the [connection guide](https://masko.ai/docs/ai-tools/cursor),
+sign in through OAuth, and choose the user's personal or team workspace.
+Skills-only installation adds instructions; configure and authorize the MCP
+separately in the host. Other hosts need their own supported Masko connection.
+A safe first check is to list projects, mascots and credits without generating.
+
+Use Masko's connected MCP tools for this workflow. Discover the MCP tools
 before declaring them unavailable. If they are unavailable, or the host blocks
 an action for approval, explain the exact limitation and stop the affected step.
 Do not substitute the Masko Mac app, another account, or a direct API credential
-to make a plugin operation appear successful. Do not change host permissions.
+to make an MCP operation appear successful. Do not change host permissions.
 
 Establish the target platform and desired app events. Read `get_integration_guide`
 for `canvas/build`, `canvas/generate-all`, and `integrations/playback` before
-choosing inputs. Implement playback directly for the target platform. Keep the two-player handoff
+choosing inputs. Implement playback directly for the target platform. Keep the
+two-player handoff
 separate from graph evaluation; the guide defines frame readiness, stale-callback
 guards and failure behavior. Do not assume equal graph support on every platform.
 Translate app events into supported behavior/action inputs; never invent SDK

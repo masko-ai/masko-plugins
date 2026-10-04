@@ -5,11 +5,18 @@ description: Integrate completed Masko images, animations or interactive release
 
 # Integrate a mascot
 
-Use Masko's connected MCP tools for this workflow. Discover the plugin's tools
+These instructions require Masko's hosted MCP at https://masko.ai/api/mcp.
+For Cursor, follow the [connection guide](https://masko.ai/docs/ai-tools/cursor),
+sign in through OAuth, and choose the user's personal or team workspace.
+Skills-only installation adds instructions; configure and authorize the MCP
+separately in the host. Other hosts need their own supported Masko connection.
+A safe first check is to list projects, mascots and credits without generating.
+
+Use Masko's connected MCP tools for this workflow. Discover the MCP tools
 before declaring them unavailable. If they are unavailable, or the host blocks
 an action for approval, explain the exact limitation and stop the affected step.
 Do not substitute the Masko Mac app, another account, or a direct API credential
-to make a plugin operation appear successful. Do not change host permissions.
+to make an MCP operation appear successful. Do not change host permissions.
 
 Use the platform already established by the user or repository. Otherwise ask
 whether the target is a website, React app, macOS app, iOS app or another target.
@@ -32,7 +39,8 @@ Choose the smallest player that handles the requested behavior:
 For every clip change, preserve the outgoing frame while the inactive player
 loads and decodes the next one. Commit only after both a verified candidate frame
 and the permitted graph boundary. Swap once without crossfading, pause the old
-slot, and release it only after replacement presentation. Never clear/remount the visible player while preparing, or
+slot, and release it only after replacement presentation. Never clear/remount the
+visible player while preparing, or
 use a timeout as permission to reveal an unready player. On failure, retain the
 old frame or initial poster. Guard ready/end/error/cleanup callbacks with request
 and slot-version identities so stale work cannot swap or clear a reused player.
