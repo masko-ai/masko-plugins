@@ -19,13 +19,28 @@ Do not substitute the Masko Mac app, another account, or a direct API credential
 to make an MCP operation appear successful. Do not change host permissions.
 
 Establish the target platform and desired app events. Read `get_integration_guide`
-for `canvas/build`, `canvas/generate-all`, and `integrations/playback` before
-choosing inputs. Implement playback directly for the target platform. Keep the
-two-player handoff
-separate from graph evaluation; the guide defines frame readiness, stale-callback
-guards and failure behavior. Do not assume equal graph support on every platform.
-Translate app events into supported behavior/action inputs; never invent SDK
-methods or unresolved graph inputs.
+for `canvas/build`, `canvas/generate-all`, and `player/canvas` before choosing
+inputs. Play the release with the platform's Masko player (open source,
+https://github.com/masko-ai/masko-player), which runs every canvas rule; never
+write a player of your own:
+
+- Web: `npm install @masko/player` (`mountMascot`; React: `@masko/player/react`).
+- iPhone, iPad, Mac and visionOS: Swift package
+  `https://github.com/masko-ai/masko-player` from `0.1.9`, product `MaskoPlayer`.
+- React Native and Expo: `npm install @masko/player-react-native`.
+- Android: `ai.masko:player` is not on Maven Central yet. Build it from the
+  repository's `android/README.md`.
+
+Do not install or recommend `@masko/sdk`.
+
+The app drives the player with `set(name, value)` for held states and
+`fire(name)` for one-time events. Translate app events into behavior/action
+inputs the canvas declares or behavior families listed in `player/canvas`;
+never invent player methods or unresolved graph inputs. The player does not
+watch the pointer: the app sets `pointerHover` and fires `click` itself. Every
+move starts when the loop on screen ends, unless the app sends the value with
+`instant`. When several behaviors are on, the canvas's priorities decide which
+one shows.
 
 Reuse a project, mascot and canvas when appropriate. For new work,
 `create_canvas` creates an empty graph. Fetch `get_canvas`, then `save_canvas`
@@ -35,7 +50,8 @@ read the current graph and reconcile changes instead of overwriting them.
 
 Compose the behavior the user requested: a sensible starting state, actions,
 transition conditions and a return path. Any State priorities choose among
-competing actions. Reverse edges can reuse completed forward animations. Do not
+competing actions. Generation makes reverse edges free from their forward
+animations; never point a reverse edge at its forward video. Do not
 add a large default graph or generate unrequested behaviors.
 
 For a new pose, give its node an `imagePrompt` and omit `assetId` until generation
@@ -63,9 +79,13 @@ alone does not prove playback is complete.
 Use `list_canvas_history` to find existing releases. Call `release_canvas` with
 the current graph hash and a stable operation ID when the user wants a playable
 release. A release does not publish a marketplace listing or activate Desktop.
-Retrieve `get_release_delivery` for the supported target. Verify the starting
-state, each requested event, return transitions, and available media in the
-target application before claiming the interaction works.
+Retrieve `get_release_delivery` for the supported target. In production the
+app's backend fetches the release delivery with `target=web`, `target=apple` or
+`target=android` and forwards only `data.delivery`; the player's `getDelivery`
+asks the backend again before signed links expire. Never put Masko credentials
+or OAuth tokens in client code. Verify the starting state, each requested
+event, return transitions, and available media in the target application
+before claiming the interaction works.
 
 If credits are insufficient, stop paid work and direct the user to
 https://masko.ai/billing to buy credits for the same personal or team workspace

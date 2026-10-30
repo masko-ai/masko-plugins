@@ -110,9 +110,11 @@ want public URLs, or keep private delivery behind your application's backend.
 Never embed Masko authoring credentials in frontend code. Animations and exports
 finish asynchronously; a queued job is not yet a finished asset.
 
-Integration skills cover direct HTML, React, Swift/SwiftUI and Android playback.
-They retrieve the current Masko guides, choose available transparent formats,
-and use two persistent players when changing clips. They do not install
+Integration skills install the open-source Masko player for the web, React,
+Swift, React Native or Android (built from its repository until it is on Maven
+Central) and connect your app's events to it with `set` and `fire`. A single
+looping clip plays in the same player from its hosted files. They retrieve the current Masko
+guides and choose available transparent formats. They do not install
 `@masko/sdk`, deploy your application, or control the Masko Desktop companion.
 
 ## Troubleshooting and support

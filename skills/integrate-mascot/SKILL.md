@@ -1,6 +1,6 @@
 ---
 name: integrate-mascot
-description: Integrate completed Masko images, animations or interactive releases into the user's website or app. Use for HTML, React, Swift/SwiftUI and platform-specific playback guidance.
+description: Integrate completed Masko images, animations or interactive releases into the user's website or app. Use for installing the Masko player on the web, React, Swift, React Native or Android, and for single-clip playback.
 ---
 
 # Integrate a mascot
@@ -20,48 +20,58 @@ to make an MCP operation appear successful. Do not change host permissions.
 
 Use the platform already established by the user or repository. Otherwise ask
 whether the target is a website, React app, macOS app, iOS app or another target.
-Use `get_integration_guide` with `topic: "integrations/playback"` before writing
-playback code. Implement the player directly in the user's platform. Do not
+Use `get_integration_guide` with `topic: "player"` before writing playback code,
+then `player/one-animation` or `player/canvas` for the case at hand. Do not
 install or recommend `@masko/sdk` for this integration.
 
 Retrieve existing results with `get_asset`, `list_assets`, `get_mascot_cdn`, or
 `get_release_delivery`; do not regenerate a character merely to integrate it.
 Use `export_asset` only for missing required formats and wait for its result.
 
-Choose the smallest player that handles the requested behavior:
+Always play the mascot with the open-source Masko player
+(https://github.com/masko-ai/masko-player); never write a player of your own:
 
-- One unchanged looping animation: a simple native/video player.
-- Changing clips: two persistent players with verified-frame handoffs.
-- Interactive graph: add a controller that respects declared inputs, conditions,
-  priorities and return paths. Two buffers alone are not a state machine. Read
-  `canvas/build` and `canvas/export` for the graph contract; do not invent methods.
+- One unchanged looping animation: give the player the animation's files in
+  place of a delivery: `mountMascot(element, { clip: { webm, hevc } })`,
+  `<MaskoPlayer clip={{ webm, hevc }} />`, `MaskoPlayer(clip: hevcURL)` on Apple,
+  `view.loadClip(stackedUrl)` on Android, `<MaskoView clip={{ hevc, stacked }} />` in
+  React Native. It picks the file the platform shows with transparency and loops it.
+- An interactive release, or clips that change with app events: clips that
+  change belong in a canvas release; use `build-interactive-mascot` when there
+  is none yet. Apps fetch the delivery with `formats=av1` (the player's
+  `formats`) for the lighter stacked AV1 files.
+- Install: web `npm install @masko/player`, then `mountMascot(element, { delivery, getDelivery })`;
+  React `<MaskoPlayer ref delivery getDelivery />` from `@masko/player/react`; no
+  build step `https://cdn.jsdelivr.net/npm/@masko/player@0.1/dist/masko-player.js`
+  (defines `window.MaskoPlayer.mount`). iPhone, iPad, Mac and visionOS: Swift
+  package `https://github.com/masko-ai/masko-player` from `0.1.9`, product
+  `MaskoPlayer`. React Native and Expo: `npm install @masko/player-react-native`,
+  then rebuild the native app. Android: `ai.masko:player` is not on Maven
+  Central yet; build it from the repository's `android/README.md`.
 
-For every clip change, preserve the outgoing frame while the inactive player
-loads and decodes the next one. Commit only after both a verified candidate frame
-and the permitted graph boundary. Swap once without crossfading, pause the old
-slot, and release it only after replacement presentation. Never clear/remount the
-visible player while preparing, or
-use a timeout as permission to reveal an unready player. On failure, retain the
-old frame or initial poster. Guard ready/end/error/cleanup callbacks with request
-and slot-version identities so stale work cannot swap or clear a reused player.
+Wire the Masko player to app events with `set(name, value)` for held states and
+`fire(name)` for one-time events, using inputs the canvas declares or behavior
+families listed in the guide; never invent methods or input names. The player
+does not watch the pointer, clicks or taps: the app sets `pointerHover` and
+fires `click` itself, and sets `heldContact`, `heldShake` and `falling` only if
+it implements dragging. Every move begins when the loop on screen ends, unless
+the app sends the value with `instant`; the canvas's priorities decide which
+behavior shows. `preview.showPose` and `preview.playMove` are for editors, not
+apps. Clips' own voices play by default; `sound: false` (`setSound(false)` on
+the web) mutes them. Browsers allow sound only after the person's first gesture
+on the page. Listen to `error` events and report them.
 
-On web, use current-source video frame callbacks and a persistent canvas or
-atomic video-layer swap. On Apple platforms, use persistent AVPlayer layers,
-layer readiness plus a decoded pixel buffer, and one CATransaction with implicit
-animations disabled. On Android, require a rendered frame before switching the
-selected surface/texture. The guide covers each handoff and its failure behavior.
-
-Select actual supported media formats; verify transparent alpha instead of
-assuming any MP4 is transparent. Handle reduced motion, autoplay blocking,
-background/resume and disposal. Drive completion from media events rather than
-fixed duration timers. Verify idle → action → idle, rapid requests, slow/failing
-loads, and transparency over light/dark backgrounds. Do not claim visual parity
-with Desktop or Life from code generation alone.
+In every case, verify idle → action → idle, rapid requests, slow/failing loads,
+and transparency over light/dark backgrounds. Do not claim visual parity with
+Desktop or Life from code generation alone.
 
 Production private-release delivery belongs behind the user's authorized backend.
-Forward only the signed delivery payload to their frontend. Never put Masko
-authoring credentials or OAuth tokens in client code. Signed URLs expire; show
-how to obtain fresh authorized delivery rather than hard-coding temporary links.
+It calls `GET https://api.masko.ai/v1/canvases/{canvasId}/releases/{releaseId}/delivery`
+with `target=web`, `target=apple` or `target=android` for the platform and
+forwards only `data.delivery` to the app; `get_release_delivery` is for checks.
+Never put Masko authoring credentials or OAuth tokens in client code. Signed URLs
+expire: pass the player a `getDelivery` function that asks the backend again,
+rather than hard-coding temporary links.
 For permanent public CDN URLs, explain what becomes public and use
 `publish_mascot_assets` only when the user requests or approves public sharing.
 

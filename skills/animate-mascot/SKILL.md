@@ -31,7 +31,7 @@ the action, timing and loop behavior. Ask about cropping if important details
 would be lost in a square frame.
 
 Read `get_credits` and explain cost before paid work. Standard defaults to 5
-seconds and costs 2 credits/second (5–15 whole seconds). Premium costs 6
+seconds and costs 2 credits/second (2–15 whole seconds). Premium costs 6
 credits/second (4–30 whole seconds). Choose Standard unless the request warrants
 Premium. Do not silently increase quality, duration or the number of outputs.
 
