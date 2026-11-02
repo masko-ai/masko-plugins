@@ -93,8 +93,8 @@ you, then run the same connection check.
 
 Generation uses the connected workspace's Masko credits. Cursor subscriptions
 do not include these credits. The agent explains the cost before generation;
-buy additional credits on Masko or use the checkout tool to open Stripe when
-you request a purchase. The plugin does not automatically pay for you.
+buy additional credits on Masko's Billing page (https://masko.ai/billing). No
+tool takes a payment.
 
 ## Images and delivery
 
@@ -105,14 +105,14 @@ a downloadable attachment. For a local-only image, upload it on masko.ai first,
 then ask Cursor to use the saved asset. The plugin does not expose local files
 through a public host automatically.
 
-New mascots start private. Preview links expire. Publish assets only when you
-want public URLs, or keep private delivery behind your application's backend.
-Never embed Masko authoring credentials in frontend code. Animations and exports
+New mascots start private. Preview links expire. Publish assets when you want
+permanent public links on assets.masko.ai, and give a canvas to an app with an
+app key of that mascot. Never embed your Masko API key in frontend code. Animations and exports
 finish asynchronously; a queued job is not yet a finished asset.
 
 Integration skills install the open-source Masko player for the web, React,
-Swift, React Native or Android (built from its repository until it is on Maven
-Central) and connect your app's events to it with `set` and `fire`. A single
+Swift, React Native or Android (from Maven Central) and connect your app's
+events to it with `set` and `fire`. A single
 looping clip plays in the same player from its hosted files. They retrieve the current Masko
 guides and choose available transparent formats. They do not install
 `@masko/sdk`, deploy your application, or control the Masko Desktop companion.
