@@ -36,10 +36,11 @@ excitement. 0.80-1.70s: springs up, both arms thrown high. 1.70-2.60s: lands
 softly and sways side to side. 2.60-3.80s: jumps again, a little higher.
 3.80-5.17s: lands and crouches into the next spring." Say what moves in each
 moment, how big, how fast and the mood, never the mascot's look. Timing
-matters: show the user the ranges first, so you agree on the motion; Masko keeps
-them as the plan. In a loop the last range keeps
-the action going into the next cycle: it never lowers, returns or settles,
-because Masko joins the end to the start. For an action that ends
+matters: show the user the ranges so you agree on the motion, and ask before
+generating unless they already said to go ahead; then show them and generate in
+the same reply. Masko keeps them as the plan. In a loop the last range keeps the
+action going into the next cycle: it never lowers, returns or settles, because
+Masko joins the end to the start. For an action that ends
 somewhere else, such as falling asleep, set `loop` to false. Name the clip in 1
 to 3 words. A picture that is not square is cut to its centered square unless
 `crop` gives the square to keep (left, top and side in pixels). `suggest_ideas`
