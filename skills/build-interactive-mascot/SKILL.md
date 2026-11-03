@@ -66,8 +66,9 @@ For a new pose, give its node an `imagePrompt` and omit `assetId` until generati
 assigns it. A node label alone does not schedule image generation. Check the
 estimate's `planned_nodes`, `planned_edges` and `cost_credits` against the
 requested work before asking to spend credits. Write each edge's description
-as one action in plain words, with how big, how fast and the mood; never
-timings or the mascot's look.
+as one action in time ranges over the clip, with how big, how fast and the
+mood, never the mascot's look; a loop's last range keeps the action going and
+never lowers, returns or settles.
 
 `create_canvas`, `get_canvas` and `save_canvas` return the validation. Correct
 invalid topology before generation. Use `estimate_canvas_generation` with an
@@ -106,7 +107,7 @@ event, return transitions, and available media in the target application
 before claiming the interaction works.
 
 If credits are insufficient, stop paid work and tell the user how many credits
-the job needs and how many the connected workspace has; they add credits at
-https://masko.ai/billing, since no tool takes payments. Never collect payment
+the job needs and how many the connected workspace has; no tool takes
+payments. Never collect payment
 details or claim a purchase completed. Recheck the connected balance before
 resuming; never switch workspaces to find extra credits.
