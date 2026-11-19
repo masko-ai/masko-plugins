@@ -63,6 +63,10 @@ The app reads the release through that link, which carries the mascot's app key:
 - **Websites and Electron:** the web player (0.1.13 and later) does it from the link straight from the page, with no server: `mountMascot(element, { url, appKey })`, or `<MaskoPlayer url={url} appKey={appKey} />` in React. The API refuses a page that sends the account key.
 - **Android, React Native and Flutter:** the app makes the request and gives the player a `getDelivery` that repeats it before the signed links expire.
 
+## A mascot on the desktop
+
+A desktop pet, or any mascot that lives on the Mac desktop outside the app's windows, goes in `MaskoOverlay(player: player, size:)` from the Swift package's `MaskoOverlay` product (0.1.20 or later), never a window of your own: it stays above every app, on every desktop, and still while desktops swipe. The app moves it with `setFrameOrigin`. Leave it out of Mac App Store apps, since it uses a private macOS framework. On Windows, a desktop mascot is an Electron app with a transparent window and the web player.
+
 ## Drive it from the app
 
 - `set(name, value)` holds a state; `fire(name)` sends a one-time event. `app_inputs` in the delivery says which input takes which: a reaction the release plays once is fired, never held on.
