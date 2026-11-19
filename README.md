@@ -1,10 +1,11 @@
-# Masko workflow skills and Cursor plugin
+# Masko plugins for Claude Code and Cursor
 
 Create a character for your product, animate your own artwork, and put the
 finished mascot into your app or website.
 
-Use these four skills with a connected Masko MCP. The repository also includes a
-Cursor plugin that bundles the skills and connection configuration.
+Use these four skills with a connected Masko MCP. The repository is also a
+Claude Code plugin and a Cursor plugin, each bundling the skills and the
+connection to Masko.
 
 | Skill | Use it to |
 | --- | --- |
@@ -12,6 +13,30 @@ Cursor plugin that bundles the skills and connection configuration.
 | `animate-mascot` | Animate an existing character or an imported image |
 | `build-interactive-mascot` | Build states and reactions to product events |
 | `integrate-mascot` | Add assets and smooth animation switching to your app |
+
+## Install in Claude Code
+
+In Claude Code, add this repository as a plugin marketplace and install Masko:
+
+```text
+/plugin marketplace add masko-ai/masko-plugins
+/plugin install masko@masko-ai
+```
+
+Or in one step on Claude Code 2.1.275 and later:
+
+```text
+/plugin install masko --marketplace masko-ai/masko-plugins
+```
+
+From a terminal, `claude plugin marketplace add masko-ai/masko-plugins` and
+`claude plugin install masko@masko-ai` do the same. Then run `/mcp`, choose
+masko and **Authenticate**: masko.ai opens, you sign in, choose your workspace
+and approve, with no key to paste. The four skills appear as
+`/masko:create-mascot`, `/masko:animate-mascot`,
+`/masko:build-interactive-mascot` and `/masko:integrate-mascot`, and Claude
+also uses them on its own when a request fits. If you already added Masko with
+`claude mcp add`, Claude Code connects to it once.
 
 ## Install standalone skills in Cursor
 

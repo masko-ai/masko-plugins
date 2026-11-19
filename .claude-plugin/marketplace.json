@@ -1,0 +1,13 @@
+{
+  "name": "masko-ai",
+  "description": "Masko's plugin for Claude Code: create, animate and ship mascots.",
+  "owner": { "name": "Masko", "url": "https://masko.ai" },
+  "plugins": [
+    {
+      "name": "masko",
+      "source": "./",
+      "description": "Create and animate mascots, build interactive behaviors, and integrate transparent assets into your app or website.",
+      "category": "design"
+    }
+  ]
+}

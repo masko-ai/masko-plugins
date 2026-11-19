@@ -1,0 +1,33 @@
+{
+  "name": "masko",
+  "displayName": "Masko",
+  "version": "0.1.5",
+  "description": "Create and animate mascots, build interactive behaviors, and integrate transparent assets into your app or website.",
+  "author": {
+    "name": "Masko",
+    "url": "https://masko.ai"
+  },
+  "homepage": "https://masko.ai/docs/mcp",
+  "repository": "https://github.com/masko-ai/masko-plugins",
+  "license": "MIT",
+  "keywords": [
+    "mascot",
+    "character",
+    "animation",
+    "transparent-video",
+    "design",
+    "react",
+    "swift"
+  ],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://masko.ai/docs/mcp",
+  "supportUrl": "https://masko.ai/docs/ai-agents#send-feedback-to-masko",
+  "privacyPolicyUrl": "https://masko.ai/privacy",
+  "termsOfServiceUrl": "https://masko.ai/terms",
+  "mcpServers": {
+    "masko": {
+      "type": "http",
+      "url": "https://masko.ai/api/mcp"
+    }
+  }
+}
