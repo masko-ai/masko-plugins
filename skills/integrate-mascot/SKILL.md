@@ -67,6 +67,10 @@ The app reads the release through that link, which carries the mascot's app key:
 
 A desktop pet, or any mascot that lives on the Mac desktop outside the app's windows, goes in `MaskoOverlay(player: player, size:)` from the Swift package's `MaskoOverlay` product (0.1.20 or later), never a window of your own: it stays above every app, on every desktop, and still while desktops swipe. The app moves it with `setFrameOrigin`. Leave it out of Mac App Store apps, since it uses a private macOS framework. On Windows, a desktop mascot is an Electron app with a transparent window and the web player.
 
+## Sync the app with the animation
+
+When something in the app must happen at a moment of a clip (close a window when the finger touches it, play a thud when the mascot lands, show a bubble when it turns), call `get_release_delivery` with `motion: "timeline"`: each clip then lists its `moments` (`touch`, `takeoff`, `landing`, `turn`, `appears`, `disappears`, with the part) and `sections`, in seconds from the clip's start. Act on those times when the player's `clip` event or `position()` shows that clip; never guess a time. When the app must also place something on the mascot (a finger on a button, a bubble above the head), ask `motion: "both"`: the app request then returns each clip's `motionUrl`, which the app's code downloads for every part's position over the clip (page `generate/motion`).
+
 ## Drive it from the app
 
 - `set(name, value)` holds a state; `fire(name)` sends a one-time event. `app_inputs` in the delivery says which input takes which: a reaction the release plays once is fired, never held on.
