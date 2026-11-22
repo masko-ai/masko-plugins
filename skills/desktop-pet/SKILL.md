@@ -67,7 +67,7 @@ Play the release from its link with the key already in it (`get_release_delivery
 - `travel`, on a clip that moves in place: move the window by it at the clip's time and the foot on the ground stays still. Never slide the window at a speed of your own.
 - `moments` (`touch`, `takeoff`, `landing`, `turn`): act at those times, such as closing an app at the `touch`.
 - The part tracks and `whole`: where the feet, the seat and the hands are, to line them up with an edge or a button.
-- `duration` and `facing`: each clip's real length, and when to mirror the pet. A reversed clip has no motion of its own: read the clip it reverses backwards.
+- `duration` and `facing`: each clip's real length, and when to mirror the pet. A reversed clip, such as stopping a walk, has its own motion: the clip it reverses, read backwards.
 
 ## Rules that keep it alive
 

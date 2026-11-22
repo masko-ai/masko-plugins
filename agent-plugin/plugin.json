@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "masko-studio",
+  "version": "0.1.8",
+  "description": "Create and animate mascots, build interactive behaviors, and integrate transparent assets into your app or website.",
+  "author": {
+    "name": "Masko",
+    "url": "https://masko.ai"
+  },
+  "homepage": "https://masko.ai/docs/mcp",
+  "repository": "https://github.com/masko-ai/masko-plugins",
+  "license": "MIT",
+  "keywords": [
+    "mascot",
+    "character",
+    "animation",
+    "transparent-video",
+    "design",
+    "react",
+    "swift"
+  ],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "masko": { "trust": "untrusted" }
+      }
+    }
+  }
+}
