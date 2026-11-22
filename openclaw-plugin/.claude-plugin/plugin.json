@@ -1,0 +1,28 @@
+{
+  "name": "masko-studio",
+  "displayName": "Masko Studio",
+  "version": "0.1.8",
+  "description": "Create and animate mascots, build interactive behaviors, and integrate transparent assets into your app or website.",
+  "author": {
+    "name": "Masko",
+    "url": "https://masko.ai"
+  },
+  "homepage": "https://masko.ai/docs/ai-tools/openclaw",
+  "repository": "https://github.com/masko-ai/masko-plugins",
+  "license": "MIT",
+  "keywords": [
+    "mascot",
+    "character",
+    "animation",
+    "transparent-video",
+    "design",
+    "react",
+    "swift"
+  ],
+  "mcpServers": {
+    "masko": {
+      "type": "http",
+      "url": "https://masko.ai/api/mcp"
+    }
+  }
+}
